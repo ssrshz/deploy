@@ -58,3 +58,10 @@ tar_EOF
   serial: 10
   
   ```
+  
+ 4. ansible --private-key参数
+ 
+ 
+ 指定ansible管理机器使用的远程控制的用户私钥，公钥分发到被控制机器的authorized_keys
+ 不依赖用户在本地是否存在
+ 
