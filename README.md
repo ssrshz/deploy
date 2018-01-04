@@ -19,4 +19,42 @@ cat>.tar_env.env<<tar_EOF
 tar_env=${x}
 tar_EOF
 ```
+3. ansible 特殊用法
 
+* serial 可以控制playbook一次更新多少台机器
+
+```
+- name: test play
+  hosts: webservers
+  serial: 3
+
+- name: test play
+  hosts: webservers
+  serial: "30%"
+  
+- name: test play
+  hosts: webservers
+  serial:
+  - 1
+  - 5
+  - 10
+  
+  - name: test play
+  hosts: webservers
+  serial:
+  - "10%"
+  - "20%"
+  - "100%"
+  
+  - name: test play
+  hosts: webservers
+  serial:
+  - 1
+  - 5
+  - "20%"
+  
+  - hosts: webservers
+  max_fail_percentage: 30
+  serial: 10
+  
+  ```
