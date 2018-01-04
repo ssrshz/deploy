@@ -13,9 +13,10 @@ hello world
 * $() 常用于将命令执行结果赋值给一个变量
 * ${}使用变量
 * 特殊输入用法,将标识之间的内容，可以包含变量，保存到.tar_env.env文件
-  ```
-  cat>.tar_env.env<<tar_EOF
-  tar_env=${x}
-  tar_EOF
-  ```
+
+```
+cat>.tar_env.env<<tar_EOF
+tar_env=${x}
+tar_EOF
+```
 
