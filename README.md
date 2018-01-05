@@ -62,6 +62,6 @@ tar_EOF
  * ansible --private-key参数
  
  
- 指定ansible管理机器使用的远程控制的用户私钥，公钥分发到被控制机器的authorized_keys，
+ 指定ansible管理机器使用的远程控制的用户私钥，其对应公钥分发到被控制机器的authorized_keys，
  不依赖用户在管理端是否存在，便于后期自定义轮换密钥
  
