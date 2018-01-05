@@ -68,3 +68,5 @@ tar_EOF
  * handlers
  
  只有在所有的task都执行后(如果某个task执行失败 并且没有设置ignore_errors 后续的操作都不会再执行 包括被通告的handlers) handler才运行 而且只会运行一次 即使被多次被通告 handler按照在playbook中的先后顺序执行 而不是被通告的顺序
+ 
+ 主要用于善后的场景，如启动，重启，清理等
