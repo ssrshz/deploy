@@ -70,3 +70,19 @@ tar_EOF
  只有在所有的task都执行后(如果某个task执行失败 并且没有设置ignore_errors 后续的操作都不会再执行 包括被通告的handlers) handler才运行 而且只会运行一次 即使被多次被通告 handler按照在playbook中的先后顺序执行 而不是被通告的顺序
  
  主要用于善后的场景，如启动，重启，清理等
+ 
+ * 任务委派 delegate_to
+ 
+ 应用场景：相当于节点tasks执行时，需要实现某一个任务只在某一台节点上执行，其它节点不执行，如初始化，上下负载等
+ 委派的机器前提：与ansible可以直接信任通信，不需要存在于inventory文件中，相当于一个特殊节点
+ 
+ ```
+   - fetch:
+      src: "/data/archive/1.txt"
+      dest: "./"
+      flat: yes
+    run_once: yes
+    delegate_to: 10.0.0.1
+   
+   从归档机器上下载一份文件，然后分别拷贝至目标节点
+ ```
