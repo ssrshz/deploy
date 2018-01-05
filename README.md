@@ -65,3 +65,5 @@ tar_EOF
  指定ansible管理机器使用的远程控制的用户私钥，其对应公钥分发到被控制机器的authorized_keys，
  不依赖用户在管理端是否存在，便于后期自定义轮换密钥
  
+ * handlers
+ 只有在所有的task都执行后(如果某个task执行失败 并且没有设置ignore_errors 后续的操作都不会再执行 包括被通告的handlers) handler才运行 而且只会运行一次 即使被多次被通告 handler按照在playbook中的先后顺序执行 而不是被通告的顺序
