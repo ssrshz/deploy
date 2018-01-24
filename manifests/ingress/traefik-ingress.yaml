@@ -89,5 +89,7 @@ spec:
     - protocol: TCP
       # 该端口为 traefik 的管理WEB界面
       port: 8080
+      #没有nodePort，则不映射
       name: admin
   type: NodePort
+  #开启支持映射到本机端口类型
