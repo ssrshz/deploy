@@ -64,7 +64,7 @@ spec:
       serviceAccountName: traefik-ingress-controller
       terminationGracePeriodSeconds: 60
       containers:
-      - image: traefik
+      - image: traefik:v1.5.0-alpine
         name: traefik-ingress-lb
         args:
         - --web
