@@ -1,0 +1,24 @@
+error_log stderr notice;
+
+worker_processes auto;
+events {
+  multi_accept on;
+  use epoll;
+  worker_connections 10240;
+}
+
+stream {
+    upstream kube_apiserver {
+        least_conn;
+        server {{MASTER_IP_01}}:6443;
+        server {{MASTER_IP_02}}:6443;
+    }
+
+    server {
+        listen        0.0.0.0:6443;
+        proxy_pass    kube_apiserver;
+        proxy_timeout 10m;
+        proxy_connect_timeout 5s;
+        proxy_buffer_size 64k;
+    }
+}

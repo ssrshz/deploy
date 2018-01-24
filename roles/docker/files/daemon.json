@@ -1,0 +1,6 @@
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"], 
+  "max-concurrent-downloads": 6,
+  "insecure-registries": ["reg.rfdoa.cn"],
+  "storage-driver": "overlay"
+}
