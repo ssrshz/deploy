@@ -2,5 +2,6 @@
   "registry-mirrors": ["https://registry.docker-cn.com"], 
   "max-concurrent-downloads": 6,
   "insecure-registries": ["reg.rfdoa.cn"],
-  "storage-driver": "overlay"
+  "storage-driver": "overlay",
+  "log-opts": {"max-size" :"10m","max-file":"2"}
 }

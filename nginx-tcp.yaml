@@ -1,0 +1,71 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx-config: |-
+      error_log stderr notice;
+      worker_processes auto;
+      events {
+        multi_accept on;
+        use epoll;
+        worker_connections 10240;
+      }
+      stream {
+          upstream kube_apiserver {
+              least_conn;
+              server 10.230.248.225:6443;
+          }
+          server {
+              listen        0.0.0.0:6443;
+              proxy_pass    kube_apiserver;
+              proxy_timeout 10m;
+              proxy_connect_timeout 5s;
+              proxy_buffer_size 64k;
+          }
+      }
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: my-nginx
+  labels:
+    name: my-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: my-nginx
+  template:
+    metadata:
+      labels:
+        name: my-nginx
+    spec:
+      containers:
+      - image: nginx:1.12.2-alpine
+        name: my-nginx
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx-config
+          items:
+          - key: nginx-config
+            path: nginx.conf
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-nginx-service
+spec:
+  selector:
+    name: my-nginx
+  ports:
+    - protocol: TCP
+      port: 16443
+      targetPort: 6443
+      nodePort: 20001
+  type: NodePort
