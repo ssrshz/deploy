@@ -28,7 +28,7 @@
 
     调整lock memory大小限制
 
-        > ulimit -l unlimited
+    > ulimit -l unlimited
 
     调整stack大小限制
 
@@ -50,7 +50,7 @@
     另外，内存32G大小的限制，目前是为了触发jvm的compressed oops机制，提高内存使用效率，但是由于平台和jvm版本的差异，这个阈值并不是恰好为32G，需要自行进行测试,获取一个最佳值。
 
     ```
-    java -Xmx32600m -XX:+PrintFlagsFinal 2> /dev/null	grep UseCompressedOops
+    java -Xmx32600m -XX:+PrintFlagsFinal 2> /dev/null | grep UseCompressedOops
     ```
 - **分片建议** 分片的大小和数量之间需要一个平衡：分片过小数量过大会产生更大的集群状态信息，更多的segment文件，占用更多jvm内存，分片过大数量过小则会影响查询性能。
 
